@@ -371,6 +371,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1980729991}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &242453706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5071726117738106419, guid: 95c74dbdecb393e4f9f904c0856daced,
+    type: 3}
+  m_PrefabInstance: {fileID: 342840048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &242453710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242453706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01774a635e32f942ad7f1766eb751fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &264340265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -462,6 +480,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 42.800003
       objectReference: {fileID: 0}
+    - target: {fileID: 6281111840033388632, guid: 95c74dbdecb393e4f9f904c0856daced,
+        type: 3}
+      propertyPath: m_EnableTreeColliders
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6541956579263146331, guid: 95c74dbdecb393e4f9f904c0856daced,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -515,7 +538,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5071726117738106419, guid: 95c74dbdecb393e4f9f904c0856daced,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 242453710}
   m_SourcePrefab: {fileID: 100100000, guid: 95c74dbdecb393e4f9f904c0856daced, type: 3}
 --- !u!1 &551142486
 GameObject:
@@ -898,7 +925,7 @@ Transform:
   m_GameObject: {fileID: 880567986}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.29, y: 0.58, z: 1.31}
+  m_LocalPosition: {x: 0.63, y: 0.58, z: 1.29}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1440,7 +1467,7 @@ Transform:
   m_GameObject: {fileID: 1498937741}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.23700005}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2116,7 +2143,7 @@ Transform:
   m_GameObject: {fileID: 1545612423}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.23700005}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3042,7 +3069,7 @@ Transform:
   m_GameObject: {fileID: 1638660793}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.354, y: 0.29, z: -0.671}
+  m_LocalPosition: {x: -0.013, y: -0.042, z: -0.482}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3397,6 +3424,7 @@ GameObject:
   - component: {fileID: 2057888727}
   - component: {fileID: 2057888726}
   - component: {fileID: 2057888725}
+  - component: {fileID: 2057888728}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -3444,7 +3472,7 @@ Transform:
   m_GameObject: {fileID: 2057888721}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.011, y: 57.060005, z: -9.4}
+  m_LocalPosition: {x: -63.011, y: 71.47, z: -9.4}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3470,11 +3498,11 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.2
+  m_Height: 8
+  m_Radius: 0.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.09
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2057888726
@@ -3536,6 +3564,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Timeout: 10
   m_XROrigin: {fileID: 2057888723}
+--- !u!114 &2057888728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057888721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919e39492806b334982b6b84c90dd927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 2057888727}
+  m_TurnSpeed: 60
+  m_LeftHandTurnAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Hand Turn
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: 790460fe-a9a3-436d-bbc5-35a494d01a0e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 1010738217276881514, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  m_RightHandTurnAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Hand Turn
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: 72bafdf8-6f61-4162-bd48-c7aa6682719c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
