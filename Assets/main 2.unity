@@ -621,7 +621,7 @@ TerrainCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_TerrainData: {fileID: 15600000, guid: dbb76bb15d9e5db4f9e55efbe2c814fd, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: fd46acfc10f194b4cbf07e8dc233a734, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &339370367
 Terrain:
@@ -632,7 +632,7 @@ Terrain:
   m_GameObject: {fileID: 339370365}
   m_Enabled: 1
   serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: dbb76bb15d9e5db4f9e55efbe2c814fd, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: fd46acfc10f194b4cbf07e8dc233a734, type: 2}
   m_TreeDistance: 5000
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
@@ -4607,79 +4607,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0342c126aa355c7488636310d2b8bcc3, type: 3}
---- !u!1001 &7715928604678149797
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1032026269425084240, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_Name
-      value: codigo sol
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.64278764
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7660445
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6614033057280530727, guid: 4e02fe7e94b69cf4da5625afdceeffc6,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4e02fe7e94b69cf4da5625afdceeffc6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 7715928604678149797}
   - {fileID: 917850570}
   - {fileID: 926041720}
   - {fileID: 54694616}
