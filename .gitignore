@@ -1,2 +1,11 @@
+# Ignorar carpetas y archivos temporales de Unity
+Temp/
+Logs/
+Library/
+obj/
+.vscode/
 
-/Library
+# Archivos generados por Unity
+*.csproj
+*.unitypackage
+*.sln
