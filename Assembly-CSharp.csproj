@@ -65,11 +65,13 @@
   <ItemGroup>
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\agacharse.cs" />
+    <Compile Include="Assets\textovisibe.cs" />
     <Compile Include="Assets\mejoraBucle.cs" />
     <Compile Include="Assets\AnimateHandOninput.cs" />
     <Compile Include="Assets\accionIniciar.cs" />
     <Compile Include="Assets\distanciaManos.cs" />
     <Compile Include="Assets\Girar.cs" />
+    <Compile Include="Assets\circulo.cs" />
     <Compile Include="Assets\script\CodigoSol\DiaNocheCiclo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +94,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\NewImageEffectShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
