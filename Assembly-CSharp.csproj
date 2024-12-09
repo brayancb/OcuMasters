@@ -63,8 +63,11 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.46f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\adaptadorOverlay.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\agacharse.cs" />
+    <Compile Include="Assets\desaparecerObjeto.cs" />
+    <Compile Include="Assets\agarrarAudio.cs" />
     <Compile Include="Assets\textovisibe.cs" />
     <Compile Include="Assets\mejoraBucle.cs" />
     <Compile Include="Assets\AnimateHandOninput.cs" />
