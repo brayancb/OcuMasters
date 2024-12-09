@@ -69,6 +69,7 @@
     <Compile Include="Assets\agacharse.cs" />
     <Compile Include="Assets\desaparecerObjeto.cs" />
     <Compile Include="Assets\agarrarAudio.cs" />
+    <Compile Include="Assets\RandomWalker.cs" />
     <Compile Include="Assets\textovisibe.cs" />
     <Compile Include="Assets\mejoraBucle.cs" />
     <Compile Include="Assets\AnimateHandOninput.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Assets\distanciaManos.cs" />
     <Compile Include="Assets\Girar.cs" />
     <Compile Include="Assets\AdjustAlpacaPosition.cs" />
+    <Compile Include="Assets\FoxAI.cs" />
     <Compile Include="Assets\circulo.cs" />
     <Compile Include="Assets\script\CodigoSol\DiaNocheCiclo.cs" />
   </ItemGroup>
