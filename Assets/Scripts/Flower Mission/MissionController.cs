@@ -35,8 +35,12 @@ public class MissionController : MonoBehaviour
         foreach (var flowerPrefab in flowerPrefabs)
         {
             GameObject flower = Instantiate(flowerPrefab);
-            flower.transform.position = spawnPositions[spawnIndex].position;
-            spawnIndex++;
+            flower.transform.position = spawnPositions[spawnIndex++].position;
+            
+            FlowerCollect flowerCollect = flower.GetComponent<FlowerCollect>();
+
+            if (flowerCollect == null) continue;
+            flowerCollect.missionController = this;
         }
     }
 
@@ -44,7 +48,7 @@ public class MissionController : MonoBehaviour
     {
         isMissionActive = true;
         flowersCollected = 0;
-        ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
+        //ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
     }
 
     public void StopMission()
@@ -73,7 +77,7 @@ public class MissionController : MonoBehaviour
         // Trigger mission completion events or rewards here
     }
 
-    private void ShowNotification(string message)
+    public void ShowNotification(string message)
     {
         notificationManager.ShowNotification(message);
     }

@@ -8,6 +8,13 @@ public class NotificationManager : MonoBehaviour
     public TextMeshProUGUI notificationText;
     public float distanceFromCamera = 2f;
 
+    private void Start()
+    {
+        if (notificationCanvas == null) return;
+
+        notificationCanvas.enabled = false;
+    }
+
     private void Update()
     {
         if (notificationCanvas.renderMode != RenderMode.WorldSpace) return;

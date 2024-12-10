@@ -10,6 +10,7 @@ public class FlowerCollect : MonoBehaviour
     private void Start()
     {
         XRGrabInteractable grabInteractable = GetComponent<XRGrabInteractable>();
+
         if (grabInteractable == null) return;
 
         grabInteractable.selectEntered.AddListener(OnFlowerGrabbed);
