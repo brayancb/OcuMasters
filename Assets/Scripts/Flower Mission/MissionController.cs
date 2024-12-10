@@ -37,7 +37,6 @@ public class MissionController : MonoBehaviour
             GameObject flower = Instantiate(flowerPrefab);
             flower.transform.position = spawnPositions[spawnIndex].position;
             spawnIndex++;
-            ShowNotification("Flor spawneada.");
         }
     }
 
@@ -45,7 +44,7 @@ public class MissionController : MonoBehaviour
     {
         isMissionActive = true;
         flowersCollected = 0;
-        //ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
+        ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
     }
 
     public void StopMission()
