@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.Video;
+using UnityEngine.Events;
+using System.Collections.Generic; // <-- Asegúrate de incluir esto
 
 public class CircleProgress : MonoBehaviour
 {
-    public Material radialMaterial; // El material que controla el círculo
-    public float holdTime = 2f; // Tiempo para completar el círculo
-    public GameObject canvasToHide; // El canvas que se ocultará
-    public VideoPlayer videoPlayer; // El VideoPlayer opcional para saltar el video
+    public Material radialMaterial;
+    public float holdTime = 2f;
+    public GameObject canvasToHide;
+    public Canvas canvasMision;     // Canvas que se mostrará después (asignar en el Inspector)
+    public VideoPlayer videoPlayer;
+    public UnityEvent onCanvasHidden;
 
     private InputDevice leftController;
     private InputDevice rightController;
@@ -20,47 +22,68 @@ public class CircleProgress : MonoBehaviour
     {
         InitializeControllers();
         ResetProgress();
-    }
 
-    void InitializeControllers()
-    {
-        var leftHanded = new List<InputDevice>();
-        InputDevices.GetDevicesAtXRNode(XRNode.LeftHand, leftHanded);
-        if (leftHanded.Count > 0)
-            leftController = leftHanded[0];
-
-        var rightHanded = new List<InputDevice>();
-        InputDevices.GetDevicesAtXRNode(XRNode.RightHand, rightHanded);
-        if (rightHanded.Count > 0)
-            rightController = rightHanded[0];
+        if (onCanvasHidden == null)
+        {
+            onCanvasHidden = new UnityEvent();
+        }
     }
 
     void Update()
     {
         DetectTriggerHold();
 
-        // Si ambos gatillos están presionados, actualiza el círculo
         if (isFilling && radialMaterial != null)
         {
             currentHoldTime += Time.deltaTime;
-            float progress = Mathf.Clamp01(currentHoldTime / holdTime); // Normaliza el progreso entre 0 y 1
-
-            // Calcula el nuevo valor de _Arc1
-            float arcValue = Mathf.Lerp(360f, 0f, progress); // De 360 a 0 basado en el progreso
+            float progress = Mathf.Clamp01(currentHoldTime / holdTime);
+            float arcValue = Mathf.Lerp(360f, 0f, progress);
             radialMaterial.SetFloat("_Arc1", arcValue);
 
-            // Si el progreso se completa, dispara la acción
             if (progress >= 1f)
             {
-                TriggerCompleteAction(); // Oculta el canvas o salta el video
-                ResetProgress(); // Reinicia el progreso
+                TriggerCompleteAction();
+                ResetProgress();
             }
         }
         else
         {
-            // Reinicia si se suelta algún gatillo
             ResetProgress();
         }
+    }
+
+    private void TriggerCompleteAction()
+    {
+        if (canvasToHide != null)
+        {
+            canvasToHide.SetActive(false);
+
+            if (onCanvasHidden != null)
+            {
+                onCanvasHidden.Invoke();
+            }
+        }
+
+        if (canvasMision != null)
+        {
+            canvasMision.gameObject.SetActive(true);
+            Debug.Log("Canvas de misión mostrado al saltar con los gatillos.");
+        }
+
+        if (videoPlayer != null && videoPlayer.isPlaying)
+        {
+            videoPlayer.Stop();
+        }
+    }
+
+    private void ResetProgress()
+    {
+        currentHoldTime = 0f;
+        if (radialMaterial != null)
+        {
+            radialMaterial.SetFloat("_Arc1", 360f);
+        }
+        isFilling = false;
     }
 
     private void DetectTriggerHold()
@@ -74,33 +97,23 @@ public class CircleProgress : MonoBehaviour
         if (rightController.isValid)
             rightController.TryGetFeatureValue(CommonUsages.triggerButton, out rightPressed);
 
-        // Si ambos gatillos están presionados
         isFilling = leftPressed && rightPressed;
     }
 
-    private void TriggerCompleteAction()
+    private void InitializeControllers()
     {
-        // Oculta el canvas para que no moleste al jugador
-        if (canvasToHide != null)
+        var leftHanded = new List<InputDevice>();
+        InputDevices.GetDevicesAtXRNode(XRNode.LeftHand, leftHanded);
+        if (leftHanded.Count > 0)
         {
-            canvasToHide.SetActive(false);
+            leftController = leftHanded[0];
         }
 
-        // Salta el video si está reproduciéndose
-        if (videoPlayer != null && videoPlayer.isPlaying)
+        var rightHanded = new List<InputDevice>();
+        InputDevices.GetDevicesAtXRNode(XRNode.RightHand, rightHanded);
+        if (rightHanded.Count > 0)
         {
-            videoPlayer.Stop();
-            Debug.Log("Video skipped");
+            rightController = rightHanded[0];
         }
-    }
-
-    private void ResetProgress()
-    {
-        currentHoldTime = 0f;
-        if (radialMaterial != null)
-        {
-            radialMaterial.SetFloat("_Arc1", 360f); // Reinicia el círculo a completo
-        }
-        isFilling = false;
     }
 }
