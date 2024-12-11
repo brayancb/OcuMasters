@@ -11,6 +11,9 @@ public class FollowPlayer : MonoBehaviour
     public float rotationSpeed = 5f; // Velocidad de rotación de la alpaca
     public float heightOffset = 1f; // Ajuste de altura para evitar que se quede pegada al piso
 
+    public float normalSpeed = 3.5f;  // Velocidad normal de caminar
+    public float sprintSpeed = 6.0f;  // Velocidad al acelerar (sprint)
+
     private NavMeshAgent agent; // Componente NavMeshAgent
     private Animator animator; // Componente Animator
 
@@ -44,6 +47,16 @@ public class FollowPlayer : MonoBehaviour
             return;
         }
 
+        // Detectar si se está presionando la tecla Shift para aumentar la velocidad
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            agent.speed = sprintSpeed; // Cambiar a la velocidad de sprint
+        }
+        else
+        {
+            agent.speed = normalSpeed; // Volver a la velocidad normal
+        }
+
         // Calcular la distancia entre la alpaca y la cámara principal (jugador)
         float distance = Vector3.Distance(transform.position, playerCamera.position);
 
@@ -58,22 +71,18 @@ public class FollowPlayer : MonoBehaviour
             {
                 animator.SetBool("IsWalking", true);
             }
-
-            // Asegurarse de que la velocidad del NavMeshAgent sea la normal mientras camina
-            agent.speed = 3.5f;  // Ajusta la velocidad de la alpaca mientras camina
         }
         else
         {
             // Detenerse si está cerca del jugador
             agent.isStopped = true;  // Detener el movimiento del NavMeshAgent
-            agent.SetDestination(transform.position);  // Establecer la posición actual como destino para evitar que se mueva
+            agent.SetDestination(transform.position);  // Establecer la posición actual como destino
 
             // Activar la animación de idle
             animator.SetBool("IsWalking", false);
 
             // Asegurarse de que la alpaca se quede quieta
             agent.velocity = Vector3.zero; // Esto asegura que el agente no se mueva
-            agent.speed = 0f;  // Poner la velocidad en 0 para que no se mueva
         }
 
         // Rotación hacia el jugador (suavemente)
