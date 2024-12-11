@@ -643,6 +643,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4524429386724360214, guid: dbc1b3262a99bdd48abe754f23016923,
+        type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1638660794}
     - target: {fileID: 7238514479464215651, guid: dbc1b3262a99bdd48abe754f23016923,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -826,6 +831,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 760153070215855963, guid: a9ccbd862fd7d2543a07f3f1e75e0633,
+        type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1638660794}
     - target: {fileID: 1550126509065180203, guid: a9ccbd862fd7d2543a07f3f1e75e0633,
         type: 3}
       propertyPath: m_Name
@@ -3185,6 +3195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lbo_idle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4189687280240735624, guid: 7d09ce8b9e1d1f349a8246376edf780b,
+        type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1638660794}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4042,6 +4057,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8582574561798773516, guid: a312f827486abcd46bd7b772cc4845e6,
+        type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1638660794}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5901,7 +5921,7 @@ MonoBehaviour:
   stopDistance: 2
   rotationSpeed: 5
   heightOffset: 7.5
-  normalSpeed: 3.5
+  normalSpeed: 10
   sprintSpeed: 6
 --- !u!195 &2001327432
 NavMeshAgent:
