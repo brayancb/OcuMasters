@@ -74,6 +74,7 @@
     <Compile Include="Assets\AdjustAlpacaPosition.cs" />
     <Compile Include="Assets\Scripts\Flower Mission\MissionController.cs" />
     <Compile Include="Assets\FoxAI.cs" />
+    <Compile Include="Assets\Scripts\TimeTracker.cs" />
     <Compile Include="Assets\Scripts\NotificationManager\NotificationManager.cs" />
     <Compile Include="Assets\circulo.cs" />
     <Compile Include="Assets\script\CodigoSol\DiaNocheCiclo.cs" />

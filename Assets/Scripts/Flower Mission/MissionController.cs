@@ -1,20 +1,28 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MissionController : MonoBehaviour
 {
     public NotificationManager notificationManager;
-    public int totalFlowers = 6;
+    public TimeTracker timeTracker;
+    public float secondsBeforeShine = 180f;
+    public float shineDuration = 10f;
+    public Material shineMaterial;
+
 
     [Header("Flower Spawning Settings")]
     public List<GameObject> flowerPrefabs;
     public List<Transform> spawnPositions;
 
+    private List<GameObject> spawnedFlowers = new();
     private bool isMissionActive = false;
+    private int totalFlowers;
     private int flowersCollected = 0;
 
     private void Start()
     {
+        this.totalFlowers = flowerPrefabs.Count * 2;
         StartMission();
     }
 
@@ -26,14 +34,11 @@ public class MissionController : MonoBehaviour
         {
             for(int i = 0; i<2; ++i)
             {
-                //if (spawnPositions.Count < spawnIndex + 1) return;
-
                 GameObject flower = Instantiate(flowerPrefab);
                 flower.transform.position = spawnPositions[spawnIndex++].position;
-
                 FlowerCollect flowerCollect = flower.GetComponent<FlowerCollect>();
-
                 flowerCollect.missionController = this;
+                spawnedFlowers.Add(flower);
             }
         }
     }
@@ -45,7 +50,8 @@ public class MissionController : MonoBehaviour
         SpawnFlowers();
         isMissionActive = true;
         flowersCollected = 0;
-        ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
+        notificationManager.ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
+        timeTracker.StartTimer(secondsBeforeShine, ShineRemainingFlowers);
     }
 
     public void StopMission()
@@ -53,15 +59,17 @@ public class MissionController : MonoBehaviour
         if (!isMissionActive) return;
 
         isMissionActive = false;
-        ShowNotification($"Misión detenida. Recolectaste {flowersCollected}/{totalFlowers} flores.");
+        notificationManager.ShowNotification($"Misión detenida. Recolectaste {flowersCollected}/{totalFlowers} flores.");
+        timeTracker.StopTimer();
     }
 
     public void CollectFlower(GameObject flower)
     {
         if (!isMissionActive) return;
 
-        ShowNotification($"Flores recolectadas: {++flowersCollected}/{totalFlowers}");
-        Destroy(flower, 1f);
+        notificationManager.ShowNotification($"Flores recolectadas: {++flowersCollected}/{totalFlowers}");
+        spawnedFlowers.Remove(flower);
+        Destroy(flower, 2f);
 
         if (flowersCollected >= totalFlowers)
         {
@@ -72,12 +80,35 @@ public class MissionController : MonoBehaviour
     private void CompleteMission()
     {
         isMissionActive = false;
-        ShowNotification("Misión completada. Todas las flores fueron recolectadas!");
-        // Trigger mission completion events or rewards here
+        notificationManager.ShowNotification("Misión completada. Todas las flores fueron recolectadas!");
+        timeTracker.StopTimer();
     }
 
-    public void ShowNotification(string message)
+    private void ShineRemainingFlowers()
     {
-        notificationManager.ShowNotification(message);
+        if (!isMissionActive || flowersCollected >= totalFlowers) return;
+
+        notificationManager.ShowNotification("¡Las flores restantes están brillando para ayudarte!");
+
+        foreach (var flower in spawnedFlowers)
+        {
+            if (flower != null)
+            {
+                StartCoroutine(ApplyShineEffect(flower));
+            }
+        }
+    }
+
+    private IEnumerator ApplyShineEffect(GameObject flower)
+    {
+        Renderer renderer = flower.GetComponent<Renderer>();
+        if (renderer == null || shineMaterial == null) yield break;
+
+        Material originalMaterial = renderer.material;
+        renderer.material = shineMaterial;
+
+        yield return new WaitForSeconds(shineDuration);
+
+        renderer.material = originalMaterial;
     }
 }
