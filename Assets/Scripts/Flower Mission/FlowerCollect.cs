@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -20,7 +18,7 @@ public class FlowerCollect : MonoBehaviour
     {
         if (missionController == null) return;
 
-        missionController.CollectFlower();
+        missionController.CollectFlower(gameObject);
     }
 
     private void OnDestroy()

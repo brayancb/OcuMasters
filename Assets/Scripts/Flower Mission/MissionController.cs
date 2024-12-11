@@ -4,28 +4,18 @@ using UnityEngine;
 public class MissionController : MonoBehaviour
 {
     public NotificationManager notificationManager;
-
-    public bool isMissionActive = true;
-    private int flowersCollected = 0;
     public int totalFlowers = 6;
 
     [Header("Flower Spawning Settings")]
     public List<GameObject> flowerPrefabs;
     public List<Transform> spawnPositions;
 
+    private bool isMissionActive = false;
+    private int flowersCollected = 0;
+
     private void Start()
     {
-        SpawnFlowers();
         StartMission();
-    }
-
-    private void Update()
-    {
-
-        if (isMissionActive && Input.GetKeyDown(KeyCode.Escape))
-        {
-            StopMission();
-        }
     }
 
     private void SpawnFlowers()
@@ -34,35 +24,44 @@ public class MissionController : MonoBehaviour
 
         foreach (var flowerPrefab in flowerPrefabs)
         {
-            GameObject flower = Instantiate(flowerPrefab);
-            flower.transform.position = spawnPositions[spawnIndex++].position;
-            
-            FlowerCollect flowerCollect = flower.GetComponent<FlowerCollect>();
+            for(int i = 0; i<2; ++i)
+            {
+                //if (spawnPositions.Count < spawnIndex + 1) return;
 
-            if (flowerCollect == null) continue;
-            flowerCollect.missionController = this;
+                GameObject flower = Instantiate(flowerPrefab);
+                flower.transform.position = spawnPositions[spawnIndex++].position;
+
+                FlowerCollect flowerCollect = flower.GetComponent<FlowerCollect>();
+
+                flowerCollect.missionController = this;
+            }
         }
     }
 
     public void StartMission()
     {
+        if (isMissionActive) return;
+
+        SpawnFlowers();
         isMissionActive = true;
         flowersCollected = 0;
-        //ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
+        ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
     }
 
     public void StopMission()
     {
+        if (!isMissionActive) return;
+
         isMissionActive = false;
         ShowNotification($"Misión detenida. Recolectaste {flowersCollected}/{totalFlowers} flores.");
     }
 
-    public void CollectFlower()
+    public void CollectFlower(GameObject flower)
     {
         if (!isMissionActive) return;
 
-        flowersCollected++;
-        ShowNotification($"Flores recolectadas: {flowersCollected}/{totalFlowers}");
+        ShowNotification($"Flores recolectadas: {++flowersCollected}/{totalFlowers}");
+        Destroy(flower, 1f);
 
         if (flowersCollected >= totalFlowers)
         {
