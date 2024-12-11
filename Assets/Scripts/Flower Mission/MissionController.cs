@@ -22,7 +22,7 @@ public class MissionController : MonoBehaviour
 
     private void Start()
     {
-        this.totalFlowers = flowerPrefabs.Count * 2;
+        this.totalFlowers = flowerPrefabs.Count;
         StartMission();
     }
 
@@ -32,14 +32,11 @@ public class MissionController : MonoBehaviour
 
         foreach (var flowerPrefab in flowerPrefabs)
         {
-            for(int i = 0; i<2; ++i)
-            {
-                GameObject flower = Instantiate(flowerPrefab);
-                flower.transform.position = spawnPositions[spawnIndex++].position;
-                FlowerCollect flowerCollect = flower.GetComponent<FlowerCollect>();
-                flowerCollect.missionController = this;
-                spawnedFlowers.Add(flower);
-            }
+            GameObject flower = Instantiate(flowerPrefab);
+            flower.transform.position = spawnPositions[spawnIndex++].position;
+            FlowerCollect flowerCollect = flower.GetComponent<FlowerCollect>();
+            flowerCollect.missionController = this;
+            spawnedFlowers.Add(flower);
         }
     }
 
@@ -66,6 +63,16 @@ public class MissionController : MonoBehaviour
     public void CollectFlower(GameObject flower)
     {
         if (!isMissionActive) return;
+
+        Renderer renderer = flower.GetComponent<Renderer>();
+    if (renderer != null)
+    {
+        var materialHolder = flower.GetComponent<OriginalMaterialHolder>();
+        if (materialHolder != null && materialHolder.originalMaterial != null)
+        {
+            renderer.material = materialHolder.originalMaterial;
+        }
+    }
 
         notificationManager.ShowNotification($"Flores recolectadas: {++flowersCollected}/{totalFlowers}");
         spawnedFlowers.Remove(flower);
@@ -105,10 +112,33 @@ public class MissionController : MonoBehaviour
         if (renderer == null || shineMaterial == null) yield break;
 
         Material originalMaterial = renderer.material;
-        renderer.material = shineMaterial;
+
+        // Store the original material in a component to restore later
+        var materialHolder = flower.GetComponent<OriginalMaterialHolder>() ?? flower.AddComponent<OriginalMaterialHolder>();
+        materialHolder.originalMaterial = originalMaterial;
+
+        // Clone shine material to avoid global changes
+        Material tempShineMaterial = new Material(shineMaterial);
+
+        // Reduce emission intensity (if applicable)
+        if (tempShineMaterial.HasProperty("_EmissionColor"))
+        {
+            Color emissionColor = tempShineMaterial.GetColor("_EmissionColor");
+            tempShineMaterial.SetColor("_EmissionColor", emissionColor * 0.5f); // Adjust intensity
+        }
+
+        renderer.material = tempShineMaterial;
 
         yield return new WaitForSeconds(shineDuration);
 
-        renderer.material = originalMaterial;
+        if (renderer != null)
+        {
+            renderer.material = materialHolder.originalMaterial;
+        }
     }
+}
+
+public class OriginalMaterialHolder : MonoBehaviour
+{
+    public Material originalMaterial;
 }
