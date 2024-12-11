@@ -78,11 +78,13 @@
     <Compile Include="Assets\al\AlpacaSound.cs" />
     <Compile Include="Assets\distanciaManos.cs" />
     <Compile Include="Assets\ocultar.cs" />
+    <Compile Include="Assets\aparecer.cs" />
     <Compile Include="Assets\reproducir.cs" />
     <Compile Include="Assets\Girar.cs" />
     <Compile Include="Assets\AdjustAlpacaPosition.cs" />
     <Compile Include="Assets\terminaVideo.cs" />
     <Compile Include="Assets\FoxAI.cs" />
+    <Compile Include="Assets\ocultaDespuesCine.cs" />
     <Compile Include="Assets\skip2.cs" />
     <Compile Include="Assets\circulo.cs" />
     <Compile Include="Assets\dianoche.cs" />
