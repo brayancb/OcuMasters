@@ -69,6 +69,7 @@
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\agacharse.cs" />
     <Compile Include="Assets\desaparecerObjeto.cs" />
+    <Compile Include="Assets\iniciarCanvasTextHolder.cs" />
     <Compile Include="Assets\RandomWalker.cs" />
     <Compile Include="Assets\textovisibe.cs" />
     <Compile Include="Assets\mejoraBucle.cs" />
