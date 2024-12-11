@@ -4,12 +4,12 @@ using UnityEngine.AI;
 public class RandomWalker : MonoBehaviour
 {
     public float wanderRadius = 10f;  // Radio del área para pasear
-    public float wanderDelay = 3f;   // Tiempo entre cada movimiento
-    public float heightOffset = 1f; // Ajuste de altura para evitar que se quede pegado al piso
-    public Transform playerCamera;  // Cámara principal del jugador
-    public float fleeDistance = 5f; // Distancia mínima para activar la huida
-    public float runSpeed = 10f;    // Velocidad al correr
-    public float walkSpeed = 3.5f;  // Velocidad al caminar
+    public float wanderDelay = 3f;    // Tiempo entre cada movimiento
+    public float heightOffset = 1f;  // Ajuste de altura para evitar que se quede pegado al piso
+    public Transform playerCamera;   // Cámara principal del jugador
+    public float fleeDistance = 5f;  // Distancia mínima para activar la huida
+    public float runSpeed = 10f;     // Velocidad al correr
+    public float walkSpeed = 3.5f;   // Velocidad al caminar
     public float fleeDuration = 2f; // Duración de la huida
 
     private NavMeshAgent agent;
@@ -65,6 +65,7 @@ public class RandomWalker : MonoBehaviour
             isFleeing = false; // Terminar huida
             agent.speed = walkSpeed; // Restaurar velocidad de caminar
             animator.SetBool("IsRunning", false); // Desactivar animación de correr
+            Debug.Log("Huida terminada.");
             return;
         }
 
@@ -81,6 +82,10 @@ public class RandomWalker : MonoBehaviour
             {
                 agent.SetDestination(hit.position);
                 Debug.Log("Zorro huyendo a: " + hit.position);
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró un destino válido para huir.");
             }
         }
     }
@@ -112,14 +117,17 @@ public class RandomWalker : MonoBehaviour
 
     void StartFleeing()
     {
+        Debug.Log("Iniciando huida...");
         isFleeing = true;
         fleeTimer = 0f;
 
         // Activar animación de correr
         animator.SetBool("IsRunning", true);
 
-        // Aumentar la velocidad del agente para correr
+        // Ajustar velocidad y rotación
         agent.speed = runSpeed;
+        agent.angularSpeed = 720f; // Rotación rápida para responder más ágilmente
+        agent.acceleration = 100f; // Acelerar rápidamente
 
         // Calcular la dirección opuesta al jugador
         Vector3 fleeDirection = (transform.position - playerCamera.position).normalized;
@@ -130,6 +138,7 @@ public class RandomWalker : MonoBehaviour
         if (NavMesh.SamplePosition(fleeTarget, out hit, fleeDistance, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
+            Debug.Log("Destino de huida: " + hit.position);
         }
     }
 
