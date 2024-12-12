@@ -13,7 +13,8 @@ public class CircleProgress : MonoBehaviour
     public Canvas canvasMision;     // Canvas que se mostrará después (asignar en el Inspector)
     public VideoPlayer videoPlayer;
     public UnityEvent onCanvasHidden;
-    public MissionController missionController; // Asignar en el Inspector
+    public MissionController missionController; // Asignar en el Inspector para iniciar la misión
+    public MissionController missionControllerToSkip; // Asignar en el Inspector para finalizar la misión anticipadamente
     public NotificationManager notificationManager;
 
     private InputDevice leftController;
@@ -78,6 +79,33 @@ public class CircleProgress : MonoBehaviour
                 ResetProgress();
             }
         }
+        else if (missionControllerToSkip != null && missionControllerToSkip.IsMissionActive())
+        {
+            DetectTriggerHold();
+
+            // Si ambos gatillos están presionados, actualiza el círculo
+            if (isFilling && radialMaterial != null)
+            {
+                currentHoldTime += Time.deltaTime;
+                float progress = Mathf.Clamp01(currentHoldTime / holdTime); // Normaliza el progreso entre 0 y 1
+
+                // Calcula el nuevo valor de _Arc1
+                float arcValue = Mathf.Lerp(360f, 0f, progress); // De 360 a 0 basado en el progreso
+                radialMaterial.SetFloat("_Arc1", arcValue);
+
+                // Si el progreso se completa, termina la misión
+                if (progress >= 1f)
+                {
+                    CompleteMissionEarly();
+                    ResetProgress(); // Reinicia el progreso
+                }
+            }
+            else
+            {
+                // Reinicia si se suelta algún gatillo
+                ResetProgress();
+            }
+        }
     }
 
     private void InitializeControllers()
@@ -107,7 +135,6 @@ public class CircleProgress : MonoBehaviour
         // Si ambos gatillos están presionados
         isFilling = leftPressed && rightPressed;
     }
-
 
     private void TriggerCompleteAction()
     {
@@ -187,6 +214,19 @@ public class CircleProgress : MonoBehaviour
         else
         {
             Debug.LogWarning("MissionController no está asignado en CircleProgress.");
+        }
+    }
+
+    private void CompleteMissionEarly()
+    {
+        if (missionControllerToSkip != null)
+        {
+            missionControllerToSkip.CompleteMission();
+            Debug.Log("Misión completada anticipadamente a través de CircleProgress.");
+        }
+        else
+        {
+            Debug.LogWarning("MissionController para finalizar la misión no está asignado en CircleProgress.");
         }
     }
 

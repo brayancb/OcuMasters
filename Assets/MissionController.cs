@@ -101,7 +101,7 @@ public class MissionController : MonoBehaviour
         }
     }
 
-    private void CompleteMission()
+    public void CompleteMission()
     {
         isMissionActive = false;
         notificationManager.ShowNotification("Misión completada. Todas las flores fueron recolectadas!");
@@ -111,6 +111,11 @@ public class MissionController : MonoBehaviour
 
         dayCicle.SetNight();
         Invoke(nameof(StartMeditation), startMeditationAfter);
+    }
+
+    public bool IsMissionActive()
+    {
+        return isMissionActive;
     }
 
     private void StartMeditation()
