@@ -90,6 +90,7 @@ public class MissionController : MonoBehaviour
         }
 
         spawnedFlowers.Remove(flower);
+        ++flowersCollected;
         Destroy(flower, 2f);
 
         if (flowersCollected >= totalFlowers)
