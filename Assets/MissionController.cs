@@ -58,6 +58,7 @@ public class MissionController : MonoBehaviour
         isMissionActive = false;
         notificationManager.ShowNotification($"Misión detenida. Recolectaste {flowersCollected}/{totalFlowers} flores.");
         timeTracker.StopTimer();
+        Invoke(nameof(StartMeditation), startMeditationAfter);
     }
 
     public void CollectFlower(GameObject flower)

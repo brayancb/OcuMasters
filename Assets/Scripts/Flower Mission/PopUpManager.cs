@@ -50,6 +50,8 @@ public class PopUpManager : MonoBehaviour
         flowerSizeText.text = size;
 
         popUpPanel.SetActive(true);
+
+        Invoke(nameof(ClosePopUp), 10f);
     }
 
     public void ClosePopUp()

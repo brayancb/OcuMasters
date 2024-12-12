@@ -7,7 +7,7 @@ public class AudioSequencePlayer : MonoBehaviour
     public AudioSource secondAudioSource; // Asigna el segundo AudioSource en el Inspector
     public float delayBetweenAudios = 30f; // Tiempo de espera entre los audios en segundos
 
-    void Start()
+    public void StartAudios()
     {
         if (firstAudioSource != null)
         {
