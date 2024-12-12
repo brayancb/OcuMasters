@@ -5,6 +5,12 @@ public class FlowerCollect : MonoBehaviour
 {
     public MissionController missionController;
 
+    [Header("Flower Information")]
+    public string flowerName;
+    public string description;
+    public string height;
+    public Sprite image;
+
     private void Start()
     {
         XRGrabInteractable grabInteractable = GetComponent<XRGrabInteractable>();

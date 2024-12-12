@@ -7,9 +7,7 @@ public class MissionController : MonoBehaviour
     public NotificationManager notificationManager;
     public TimeTracker timeTracker;
     public float secondsBeforeShine = 180f;
-    public float shineDuration = 10f;
     public Material shineMaterial;
-
 
     [Header("Flower Spawning Settings")]
     public List<GameObject> flowerPrefabs;
@@ -64,17 +62,33 @@ public class MissionController : MonoBehaviour
     {
         if (!isMissionActive) return;
 
-        Renderer renderer = flower.GetComponent<Renderer>();
-    if (renderer != null)
-    {
-        var materialHolder = flower.GetComponent<OriginalMaterialHolder>();
-        if (materialHolder != null && materialHolder.originalMaterial != null)
+        FlowerCollect flowerData = flower.GetComponent<FlowerCollect>();
+        if (flowerData != null)
         {
-            renderer.material = materialHolder.originalMaterial;
+            PopUpManager.Instance.ShowFlowerInfo(
+                flowerData.flowerName,
+                flowerData.height,
+                flowerData.description,
+                flowerData.image
+            );
         }
-    }
 
-        notificationManager.ShowNotification($"Flores recolectadas: {++flowersCollected}/{totalFlowers}");
+        Renderer renderer = flower.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            var materialHolder = flower.GetComponent<OriginalMaterialHolder>();
+            if (materialHolder != null && materialHolder.originalMaterial != null)
+            {
+                renderer.material = materialHolder.originalMaterial;
+            }
+        }
+
+        AudioSource audioSource = flower.GetComponent<AudioSource>();
+        if (audioSource != null)
+        {
+            audioSource.enabled = false;
+        }
+
         spawnedFlowers.Remove(flower);
         Destroy(flower, 2f);
 
@@ -101,39 +115,35 @@ public class MissionController : MonoBehaviour
         {
             if (flower != null)
             {
-                StartCoroutine(ApplyShineEffect(flower));
+                ApplyShineEffect(flower);
             }
         }
     }
 
-    private IEnumerator ApplyShineEffect(GameObject flower)
+    private void ApplyShineEffect(GameObject flower)
     {
         Renderer renderer = flower.GetComponent<Renderer>();
-        if (renderer == null || shineMaterial == null) yield break;
+        if (renderer == null || shineMaterial == null) return;
 
         Material originalMaterial = renderer.material;
 
-        // Store the original material in a component to restore later
         var materialHolder = flower.GetComponent<OriginalMaterialHolder>() ?? flower.AddComponent<OriginalMaterialHolder>();
         materialHolder.originalMaterial = originalMaterial;
 
-        // Clone shine material to avoid global changes
         Material tempShineMaterial = new Material(shineMaterial);
 
-        // Reduce emission intensity (if applicable)
         if (tempShineMaterial.HasProperty("_EmissionColor"))
         {
             Color emissionColor = tempShineMaterial.GetColor("_EmissionColor");
-            tempShineMaterial.SetColor("_EmissionColor", emissionColor * 0.5f); // Adjust intensity
+            tempShineMaterial.SetColor("_EmissionColor", emissionColor * 0.5f);
         }
 
         renderer.material = tempShineMaterial;
 
-        yield return new WaitForSeconds(shineDuration);
-
-        if (renderer != null)
+        AudioSource audioSource = flower.GetComponent<AudioSource>();
+        if (audioSource != null)
         {
-            renderer.material = materialHolder.originalMaterial;
+            audioSource.enabled = true;
         }
     }
 }
