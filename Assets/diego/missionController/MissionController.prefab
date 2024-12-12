@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4716859522202763292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4217786815369533858}
+  - component: {fileID: 7548402170735977123}
+  m_Layer: 0
+  m_Name: MissionController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4217786815369533858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716859522202763292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.008705, y: 101.66188, z: 364.78754}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7548402170735977123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716859522202763292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236346907d5cf904ebe57bd0740b406e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notificationManager: {fileID: 0}
+  timeTracker: {fileID: 0}
+  secondsBeforeShine: 10
+  shineMaterial: {fileID: 2100000, guid: 9ebb5298c5d45ae47bf561192a56cb2f, type: 2}
+  flowerPrefabs:
+  - {fileID: 7066060001763486306, guid: 30262d9e6f652a44ab9dbfa20fc026b5, type: 3}
+  - {fileID: 1270652405922266390, guid: ee0159242b0c05b4982091c59052f498, type: 3}
+  - {fileID: 7389915015254183820, guid: 5d744af2438dd254d9eadb387ebe5ef7, type: 3}
+  - {fileID: 5285053200527685045, guid: 1adc539ee4453f44fb4042dc1168248b, type: 3}
+  - {fileID: 6887500734504051976, guid: ca5e027e01098ba448a847142f719bd9, type: 3}
+  - {fileID: 9141057308569717266, guid: e9a1a1facc1f19544a836fe3b2dc5002, type: 3}
+  spawnPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
