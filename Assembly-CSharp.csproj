@@ -87,6 +87,7 @@
     <Compile Include="Assets\FoxAI.cs" />
     <Compile Include="Assets\Scripts\TimeTracker.cs" />
     <Compile Include="Assets\NotificationManagerS.cs" />
+    <Compile Include="Assets\oculteSolo.cs" />
     <Compile Include="Assets\ocultaDespuesCine.cs" />
     <Compile Include="Assets\skip2.cs" />
     <Compile Include="Assets\circulo.cs" />

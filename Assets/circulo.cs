@@ -13,7 +13,7 @@ public class CircleProgress : MonoBehaviour
     public Canvas canvasMision;     // Canvas que se mostrará después (asignar en el Inspector)
     public VideoPlayer videoPlayer;
     public UnityEvent onCanvasHidden;
-    public float delay = 5f;        // Tiempo en segundos antes de mostrar el CanvasMision
+    public MissionController missionController; // Asignar en el Inspector
 
     private InputDevice leftController;
     private InputDevice rightController;
@@ -102,19 +102,26 @@ public class CircleProgress : MonoBehaviour
             videoPlayer.Stop();
         }
 
-        // Iniciar la corrutina para mostrar el CanvasMision después del retraso
-        StartCoroutine(ShowCanvasMisionAfterDelay());
-    }
-
-    private IEnumerator ShowCanvasMisionAfterDelay()
-    {
-        // Esperar el tiempo de retraso
-        yield return new WaitForSeconds(delay);
-
+        // Mostrar el CanvasMision
         if (canvasMision != null)
         {
-            // Mostrar el CanvasMision
             canvasMision.gameObject.SetActive(true);
+            Debug.Log("CanvasMision mostrado.");
+        }
+        else
+        {
+            Debug.LogWarning("canvasMision no está asignado en CircleProgress.");
+        }
+
+        // Iniciar la misión
+        if (missionController != null)
+        {
+            missionController.StartMission();
+            Debug.Log("Misión iniciada a través de CircleProgress.");
+        }
+        else
+        {
+            Debug.LogWarning("MissionController no está asignado en CircleProgress.");
         }
     }
 
