@@ -13,8 +13,6 @@ public class MissionController : MonoBehaviour
     public List<GameObject> flowerPrefabs;
     public List<Transform> spawnPositions;
 
-    public Canvas missionStartCanvas; // Asegura que esta variable sea pública o [SerializeField]
-
     private List<GameObject> spawnedFlowers = new();
     private bool isMissionActive = false;
     private int totalFlowers;
@@ -22,51 +20,135 @@ public class MissionController : MonoBehaviour
 
     private void Start()
     {
-        totalFlowers = flowerPrefabs.Count;
-        // No iniciamos la misión aquí
-    }
-
-    public void StartMission()
-    {
-        if (!isMissionActive)
-        {
-            isMissionActive = true;
-            // Mostrar el Canvas de inicio de misión
-            if (missionStartCanvas != null)
-            {
-                missionStartCanvas.gameObject.SetActive(true);
-                // Iniciar la corrutina para esperar a que el Canvas se oculte
-                StartCoroutine(WaitForCanvasToHide());
-            }
-            else
-            {
-                // Si no hay Canvas asignado, proceder directamente
-                ProceedWithMission();
-            }
-        }
-    }
-
-    private IEnumerator WaitForCanvasToHide()
-    {
-        // Esperar hasta que el Canvas esté desactivado
-        while (missionStartCanvas.gameObject.activeSelf)
-        {
-            yield return null; // Espera al siguiente frame
-        }
-        // Proceder con la misión
-        ProceedWithMission();
-    }
-
-    private void ProceedWithMission()
-    {
-        SpawnFlowers();
-        // Cualquier lógica adicional para iniciar la misión
+        this.totalFlowers = flowerPrefabs.Count;
+        StartMission();
     }
 
     private void SpawnFlowers()
     {
-        // Tu lógica para generar las flores
+        int spawnIndex = 0;
+
+        foreach (var flowerPrefab in flowerPrefabs)
+        {
+            GameObject flower = Instantiate(flowerPrefab);
+            flower.transform.position = spawnPositions[spawnIndex++].position;
+            FlowerCollect flowerCollect = flower.GetComponent<FlowerCollect>();
+            flowerCollect.missionController = this;
+            spawnedFlowers.Add(flower);
+        }
     }
 
-    // Resto del código existente...
+    public void StartMission()
+    {
+        if (isMissionActive) return;
+
+        SpawnFlowers();
+        isMissionActive = true;
+        flowersCollected = 0;
+        notificationManager.ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
+        timeTracker.StartTimer(secondsBeforeShine, ShineRemainingFlowers);
+    }
+
+    public void StopMission()
+    {
+        if (!isMissionActive) return;
+
+        isMissionActive = false;
+        notificationManager.ShowNotification($"Misión detenida. Recolectaste {flowersCollected}/{totalFlowers} flores.");
+        timeTracker.StopTimer();
+    }
+
+    public void CollectFlower(GameObject flower)
+    {
+        if (!isMissionActive) return;
+
+        FlowerCollect flowerData = flower.GetComponent<FlowerCollect>();
+        if (flowerData != null)
+        {
+            PopUpManager.Instance.ShowFlowerInfo(
+                flowerData.flowerName,
+                flowerData.height,
+                flowerData.description,
+                flowerData.image
+            );
+        }
+
+        Renderer renderer = flower.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            var materialHolder = flower.GetComponent<OriginalMaterialHolder>();
+            if (materialHolder != null && materialHolder.originalMaterial != null)
+            {
+                renderer.material = materialHolder.originalMaterial;
+            }
+        }
+
+        AudioSource audioSource = flower.GetComponent<AudioSource>();
+        if (audioSource != null)
+        {
+            audioSource.enabled = false;
+        }
+
+        spawnedFlowers.Remove(flower);
+        Destroy(flower, 2f);
+
+        if (flowersCollected >= totalFlowers)
+        {
+            CompleteMission();
+        }
+    }
+
+    private void CompleteMission()
+    {
+        isMissionActive = false;
+        notificationManager.ShowNotification("Misión completada. Todas las flores fueron recolectadas!");
+        timeTracker.StopTimer();
+    }
+
+    private void ShineRemainingFlowers()
+    {
+        if (!isMissionActive || flowersCollected >= totalFlowers) return;
+
+        notificationManager.ShowNotification("¡Las flores restantes están brillando para ayudarte!");
+
+        foreach (var flower in spawnedFlowers)
+        {
+            if (flower != null)
+            {
+                ApplyShineEffect(flower);
+            }
+        }
+    }
+
+    private void ApplyShineEffect(GameObject flower)
+    {
+        Renderer renderer = flower.GetComponent<Renderer>();
+        if (renderer == null || shineMaterial == null) return;
+
+        Material originalMaterial = renderer.material;
+
+        var materialHolder = flower.GetComponent<OriginalMaterialHolder>() ?? flower.AddComponent<OriginalMaterialHolder>();
+        materialHolder.originalMaterial = originalMaterial;
+
+        Material tempShineMaterial = new Material(shineMaterial);
+
+        if (tempShineMaterial.HasProperty("_EmissionColor"))
+        {
+            Color emissionColor = tempShineMaterial.GetColor("_EmissionColor");
+            tempShineMaterial.SetColor("_EmissionColor", emissionColor * 0.5f);
+        }
+
+        renderer.material = tempShineMaterial;
+
+        AudioSource audioSource = flower.GetComponent<AudioSource>();
+        if (audioSource != null)
+        {
+            audioSource.enabled = true;
+        }
+    }
+}
+
+public class OriginalMaterialHolder : MonoBehaviour
+{
+    public Material originalMaterial;
 }

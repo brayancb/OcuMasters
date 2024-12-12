@@ -19,6 +19,7 @@ public class CircleProgress : MonoBehaviour
     private InputDevice rightController;
     private float currentHoldTime = 0f;
     private bool isFilling = false;
+    private bool missionStarted = false;
 
     void Start()
     {
@@ -29,9 +30,56 @@ public class CircleProgress : MonoBehaviour
         {
             onCanvasHidden = new UnityEvent();
         }
+
+        // Suscribirse al evento de finalización del video
+        if (videoPlayer != null)
+        {
+            videoPlayer.loopPointReached += OnVideoEnd;
+        }
     }
 
-    void InitializeControllers()
+    void OnDestroy()
+    {
+        // Cancelar la suscripción al evento
+        if (videoPlayer != null)
+        {
+            videoPlayer.loopPointReached -= OnVideoEnd;
+        }
+    }
+
+    void Update()
+    {
+        // Solo detectar la entrada si la misión no ha comenzado
+        if (!missionStarted)
+        {
+            DetectTriggerHold();
+
+            // Si ambos gatillos están presionados, actualiza el círculo
+            if (isFilling && radialMaterial != null)
+            {
+                currentHoldTime += Time.deltaTime;
+                float progress = Mathf.Clamp01(currentHoldTime / holdTime); // Normaliza el progreso entre 0 y 1
+
+                // Calcula el nuevo valor de _Arc1
+                float arcValue = Mathf.Lerp(360f, 0f, progress); // De 360 a 0 basado en el progreso
+                radialMaterial.SetFloat("_Arc1", arcValue);
+
+                // Si el progreso se completa, dispara la acción
+                if (progress >= 1f)
+                {
+                    TriggerCompleteAction(); // Oculta el canvas o salta el video
+                    ResetProgress(); // Reinicia el progreso
+                }
+            }
+            else
+            {
+                // Reinicia si se suelta algún gatillo
+                ResetProgress();
+            }
+        }
+    }
+
+    private void InitializeControllers()
     {
         var leftHanded = new List<InputDevice>();
         InputDevices.GetDevicesAtXRNode(XRNode.LeftHand, leftHanded);
@@ -42,34 +90,6 @@ public class CircleProgress : MonoBehaviour
         InputDevices.GetDevicesAtXRNode(XRNode.RightHand, rightHanded);
         if (rightHanded.Count > 0)
             rightController = rightHanded[0];
-    }
-
-    void Update()
-    {
-        DetectTriggerHold();
-
-        // Si ambos gatillos están presionados, actualiza el círculo
-        if (isFilling && radialMaterial != null)
-        {
-            currentHoldTime += Time.deltaTime;
-            float progress = Mathf.Clamp01(currentHoldTime / holdTime); // Normaliza el progreso entre 0 y 1
-
-            // Calcula el nuevo valor de _Arc1
-            float arcValue = Mathf.Lerp(360f, 0f, progress); // De 360 a 0 basado en el progreso
-            radialMaterial.SetFloat("_Arc1", arcValue);
-
-            // Si el progreso se completa, dispara la acción
-            if (progress >= 1f)
-            {
-                TriggerCompleteAction(); // Oculta el canvas o salta el video
-                ResetProgress(); // Reinicia el progreso
-            }
-        }
-        else
-        {
-            // Reinicia si se suelta algún gatillo
-            ResetProgress();
-        }
     }
 
     private void DetectTriggerHold()
@@ -89,14 +109,19 @@ public class CircleProgress : MonoBehaviour
 
     private void TriggerCompleteAction()
     {
+        // Evitamos que se llame más de una vez
+        if (missionStarted) return;
+
+        missionStarted = true;
+
         // Oculta el canvas para que no moleste al jugador
         if (canvasToHide != null)
         {
             canvasToHide.SetActive(false);
-            onCanvasHidden.Invoke(); // Dispara el evento cuando el Canvas se oculte
+            onCanvasHidden.Invoke(); // Dispara el evento cuando el Canvas se oculta
         }
 
-        // Salta el video si está reproduciéndose
+        // Detener el video si está reproduciéndose
         if (videoPlayer != null && videoPlayer.isPlaying)
         {
             videoPlayer.Stop();
@@ -118,6 +143,43 @@ public class CircleProgress : MonoBehaviour
         {
             missionController.StartMission();
             Debug.Log("Misión iniciada a través de CircleProgress.");
+        }
+        else
+        {
+            Debug.LogWarning("MissionController no está asignado en CircleProgress.");
+        }
+    }
+
+    private void OnVideoEnd(VideoPlayer vp)
+    {
+        // Evitamos que se llame más de una vez
+        if (missionStarted) return;
+
+        missionStarted = true;
+
+        // Oculta el canvas para que no moleste al jugador
+        if (canvasToHide != null)
+        {
+            canvasToHide.SetActive(false);
+            onCanvasHidden.Invoke(); // Dispara el evento cuando el Canvas se oculta
+        }
+
+        // Mostrar el CanvasMision
+        if (canvasMision != null)
+        {
+            canvasMision.gameObject.SetActive(true);
+            Debug.Log("CanvasMision mostrado al finalizar el video.");
+        }
+        else
+        {
+            Debug.LogWarning("canvasMision no está asignado en CircleProgress.");
+        }
+
+        // Iniciar la misión
+        if (missionController != null)
+        {
+            missionController.StartMission();
+            Debug.Log("Misión iniciada al finalizar el video.");
         }
         else
         {
