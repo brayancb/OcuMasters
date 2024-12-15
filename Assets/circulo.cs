@@ -132,6 +132,16 @@ public class CircleProgress : MonoBehaviour
         if (rightController.isValid)
             rightController.TryGetFeatureValue(CommonUsages.triggerButton, out rightPressed);
 
+        if (Input.GetKey(KeyCode.P))
+        {
+            rightPressed = true;
+        }
+
+        if (Input.GetKey(KeyCode.O))
+        {
+            leftPressed = true;
+        }
+
         // Si ambos gatillos están presionados
         isFilling = leftPressed && rightPressed;
     }

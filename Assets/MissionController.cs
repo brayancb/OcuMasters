@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MissionController : MonoBehaviour
@@ -8,6 +9,7 @@ public class MissionController : MonoBehaviour
     public SubtitleManager subtitleManager;
     public TimeTracker timeTracker;
     public DiaNocheCiclo dayCicle;
+    public TextMeshProUGUI flowersCollectedText;
     public float secondsBeforeShine = 180f;
     public Material shineMaterial;
     public float startMeditationAfter = 15f;
@@ -24,6 +26,7 @@ public class MissionController : MonoBehaviour
     private void Start()
     {
         this.totalFlowers = flowerPrefabs.Count;
+        this.flowersCollectedText.enabled = false;
     }
 
     private void SpawnFlowers()
@@ -46,19 +49,11 @@ public class MissionController : MonoBehaviour
 
         SpawnFlowers();
         isMissionActive = true;
+        flowersCollectedText.enabled = true;
         flowersCollected = 0;
-        notificationManager.ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
         timeTracker.StartTimer(secondsBeforeShine, ShineRemainingFlowers);
-    }
-
-    public void StopMission()
-    {
-        if (!isMissionActive) return;
-
-        isMissionActive = false;
-        notificationManager.ShowNotification($"Misión detenida. Recolectaste {flowersCollected}/{totalFlowers} flores.");
-        timeTracker.StopTimer();
-        Invoke(nameof(StartMeditation), startMeditationAfter);
+        notificationManager.ShowNotification("Misión iniciada: Recolecta las flores del Desierto de Atacama!");
+        flowersCollectedText.text = $"Flores: {flowersCollected}/{totalFlowers}";
     }
 
     public void CollectFlower(GameObject flower)
@@ -94,6 +89,7 @@ public class MissionController : MonoBehaviour
 
         spawnedFlowers.Remove(flower);
         ++flowersCollected;
+        flowersCollectedText.text = $"Flores: {flowersCollected}/{totalFlowers}";
         Destroy(flower, 2f);
 
         if (flowersCollected == totalFlowers)
@@ -104,9 +100,27 @@ public class MissionController : MonoBehaviour
 
     public void CompleteMission()
     {
+        if (!isMissionActive) return;
+
         isMissionActive = false;
-        notificationManager.ShowNotification("Misión completada. Todas las flores fueron recolectadas!");
         timeTracker.StopTimer();
+        notificationManager.ShowNotification("Misión completada. Todas las flores fueron recolectadas!");
+        flowersCollectedText.enabled = false;
+
+        if (subtitleManager == null) return;
+
+        dayCicle.SetNight();
+        Invoke(nameof(StartMeditation), startMeditationAfter);
+    }
+
+    public void StopMission()
+    {
+        if (!isMissionActive) return;
+
+        isMissionActive = false;
+        timeTracker.StopTimer();
+        notificationManager.ShowNotification($"Misión detenida. Recolectaste {flowersCollected}/{totalFlowers} flores.");
+        flowersCollectedText.enabled = false;
 
         if (subtitleManager == null) return;
 

@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|c:\\users\\diego\\onedrive\\escritorio\\cosas\\ucn\\proyecto desarrollo \u00E1gil\\ocumasters-final\\assets\\circulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|solutionrelative:assets\\circulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|c:\\users\\diego\\onedrive\\escritorio\\cosas\\ucn\\proyecto desarrollo \u00E1gil\\ocumasters-final\\assets\\iniciarcanvastextholder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|solutionrelative:assets\\iniciarcanvastextholder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|c:\\users\\diego\\onedrive\\escritorio\\cosas\\ucn\\proyecto desarrollo \u00E1gil\\ocumasters-final\\assets\\missioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|solutionrelative:assets\\missioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|c:\\users\\diego\\onedrive\\escritorio\\cosas\\ucn\\proyecto desarrollo \u00E1gil\\ocumasters-final\\assets\\scripts\\subtitlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\subtitlemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|c:\\users\\diego\\onedrive\\escritorio\\cosas\\ucn\\proyecto desarrollo \u00E1gil\\ocumasters-final\\assets\\dianoche.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|solutionrelative:assets\\dianoche.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|c:\\users\\diego\\onedrive\\escritorio\\cosas\\ucn\\proyecto desarrollo \u00E1gil\\ocumasters-final\\assets\\scripts\\flower mission\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\flower mission\\popupmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|c:\\users\\diego\\onedrive\\escritorio\\cosas\\ucn\\proyecto desarrollo \u00E1gil\\ocumasters-final\\assets\\circulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{355D7935-0776-7D32-5907-05AF371E941D}|Assembly-CSharp.csproj|solutionrelative:assets\\circulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,40 +27,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "iniciarCanvasTextHolder.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\iniciarCanvasTextHolder.cs",
+              "RelativeDocumentMoniker": "Assets\\iniciarCanvasTextHolder.cs",
+              "ToolTip": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\iniciarCanvasTextHolder.cs",
+              "RelativeToolTip": "Assets\\iniciarCanvasTextHolder.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAgwDIAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-15T16:34:47.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "circulo.cs",
               "DocumentMoniker": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\circulo.cs",
               "RelativeDocumentMoniker": "Assets\\circulo.cs",
               "ToolTip": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\circulo.cs",
               "RelativeToolTip": "Assets\\circulo.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAkwIQAAABdAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAgwI0AAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T09:32:38.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PopUpManager.cs",
-              "DocumentMoniker": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\Scripts\\Flower Mission\\PopUpManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Flower Mission\\PopUpManager.cs",
-              "ToolTip": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\Scripts\\Flower Mission\\PopUpManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Flower Mission\\PopUpManager.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwDUAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T09:24:32.493Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "dianoche.cs",
-              "DocumentMoniker": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\dianoche.cs",
-              "RelativeDocumentMoniker": "Assets\\dianoche.cs",
-              "ToolTip": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\dianoche.cs",
-              "RelativeToolTip": "Assets\\dianoche.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAgwEAAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T09:19:50.019Z",
+              "WhenOpened": "2024-12-15T15:02:51.096Z",
               "EditorCaption": ""
             },
             {
@@ -79,22 +58,9 @@
               "RelativeDocumentMoniker": "Assets\\MissionController.cs",
               "ToolTip": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\MissionController.cs",
               "RelativeToolTip": "Assets\\MissionController.cs",
-              "ViewState": "AgIAAIcAAAAAAAAAAAAIwGIAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAkwHgAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-12T09:18:06.588Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SubtitleManager.cs",
-              "DocumentMoniker": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\Scripts\\SubtitleManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SubtitleManager.cs",
-              "ToolTip": "C:\\Users\\diego\\OneDrive\\Escritorio\\Cosas\\UCN\\Proyecto Desarrollo \u00C1gil\\Ocumasters-final\\Assets\\Scripts\\SubtitleManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SubtitleManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T09:17:19.873Z",
               "EditorCaption": ""
             }
           ]

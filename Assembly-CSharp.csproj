@@ -76,6 +76,7 @@
     <Compile Include="Assets\distanciaManos.cs" />
     <Compile Include="Assets\ocultar.cs" />
     <Compile Include="Assets\aparecer.cs" />
+    <Compile Include="Assets\Scripts\CameraLock.cs" />
     <Compile Include="Assets\reproducir.cs" />
     <Compile Include="Assets\Girar.cs" />
     <Compile Include="Assets\AdjustAlpacaPosition.cs" />
